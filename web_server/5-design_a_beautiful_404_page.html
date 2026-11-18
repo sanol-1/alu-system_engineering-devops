@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>404 - Ceci n'est pas une page</title>
+<style>
+  :root { --bg: #f6f1e7; --fg: #1d2433; --accent: #c8553d; --muted: #6b7280; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #14171f; --fg: #f2ede2; --accent: #e8836b; --muted: #9aa3b2; }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; min-height: 100vh; display: flex; align-items: center;
+    justify-content: center; text-align: center; padding: 24px;
+    background: var(--bg); color: var(--fg);
+    font-family: Georgia, "Times New Roman", serif;
+  }
+  .code {
+    font-size: clamp(6rem, 25vw, 14rem); line-height: 1; font-weight: 700;
+    letter-spacing: -0.04em; color: var(--accent); margin: 0;
+    animation: float 4s ease-in-out infinite;
+  }
+  h1 { font-size: clamp(1.4rem, 4vw, 2.2rem); font-style: italic; margin: 12px 0; }
+  p { color: var(--muted); max-width: 32rem; margin: 0 auto 28px; line-height: 1.6; }
+  a {
+    display: inline-block; padding: 12px 28px; border: 2px solid var(--accent);
+    border-radius: 999px; color: var(--accent); text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif; font-weight: 600;
+    transition: background 0.2s, color 0.2s;
+  }
+  a:hover, a:focus { background: var(--accent); color: var(--bg); }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+  @media (prefers-reduced-motion: reduce) { .code { animation: none; } }
+</style>
+</head>
+<body>
+  <main>
+    <p class="code" aria-hidden="true">404</p>
+    <h1>Ceci n'est pas une page</h1>
+    <p>The page you were looking for does not exist, or has wandered off somewhere else. Nothing to see here, but plenty to see elsewhere.</p>
+    <a href="/">Back to the home page</a>
+  </main>
+</body>
+</html>
