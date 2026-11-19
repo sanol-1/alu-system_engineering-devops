@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+# Installs HAProxy and load balances web-01 and web-02 with roundrobin
+apt-get update -y
+apt-get install -y haproxy
+if grep -q '^ENABLED=' /etc/default/haproxy
+then
+  sed -i 's/^ENABLED=.*/ENABLED=1/' /etc/default/haproxy
+else
+  echo "ENABLED=1" >> /etc/default/haproxy
+fi
+cat > /etc/haproxy/haproxy.cfg << 'CONF'
+global
+    log /dev/log local0
+    maxconn 2048
+    user haproxy
+    group haproxy
+    daemon
+
+defaults
+    log global
+    mode http
+    option httplog
+    option dontlognull
+    timeout connect 5000
+    timeout client 50000
+    timeout server 50000
+
+frontend http-in
+    bind *:80
+    default_backend web_servers
+
+backend web_servers
+    balance roundrobin
+    server 7400-web-01 18.171.62.41:80 check
+    server 7400-web-02 16.60.157.242:80 check
+CONF
+service haproxy restart
